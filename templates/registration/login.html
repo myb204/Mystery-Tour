@@ -29,6 +29,10 @@
     <input type="submit" value="LOGIN" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
+  <br>
+  <form>
+    <button type="submit" formaction="/signup">Register</button>
+  </form>
   {# Assumes you setup the password_reset view in your URLconf #}
   <p><a href="{% url 'password_reset' %}">Reset Password?</a></p>
 
