@@ -1,7 +1,9 @@
 from django.urls import path
-from . import views as core_views
-
+from . import views
 
 urlpatterns = [
-    path('', core_views.index, name='index'),
+    path('', views.home, name='treasurehunt-home'),
+    path('leaderboard/', views.leaderboard, name='treasurehunt-leaderboard'),
+    path('task_one/', views.task_one, name='treasurehunt-task_one'),
+    path('end/', views.end, name='treasurehunt-end'),
 ]
