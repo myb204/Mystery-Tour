@@ -13,3 +13,4 @@ def task_one(request):
 
 def end(request):
     return render(request, 'treasurehunt/end.html', {'title': 'end'})
+
