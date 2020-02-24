@@ -20,7 +20,7 @@ class Location(models.Model):
 
 class Route(models.Model):
     routeID = models.AutoField(primary_key=True)
-    routeName = models.CharFIeld(max_length=20)
+    routeName = models.CharField(max_length=20)
 
 class RouteLocationMapping(models.Model):
     routeID = models.ForeignKey(Route)
