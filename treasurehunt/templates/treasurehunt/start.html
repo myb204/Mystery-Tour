@@ -1,0 +1,24 @@
+{% extends "treasurehunt/base.html" %}
+
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1>Start Game</h1>
+    </div>
+    <div class ="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class = "form-group">
+                {{ form }}
+            </fieldset>
+            <div class="form-group">
+                <div class="text-center">
+                    <div class="btn-group-vertical">
+                            <a class="btn btn-primary btn-lg" role="button" href="{% url 'treasurehunt-task_one' %}" role="button">
+                                Submit
+                            </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
