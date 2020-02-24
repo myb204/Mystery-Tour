@@ -5,6 +5,9 @@ from django.shortcuts import render
 def home(request):
     return render(request, 'treasurehunt/home.html')
 
+def start(request):
+    return render(request, 'treasurehunt/start.html')
+
 def leaderboard(request):
     return render(request, 'treasurehunt/leaderboard.html', {'title': 'leaderbaord'})
 
