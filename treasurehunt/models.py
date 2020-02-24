@@ -20,7 +20,11 @@ class Location(models.Model):
 
 class Route(models.Model):
     routeID = models.AutoField(primary_key=True)
-    location1 = models.ForeignKey(Location, on_delete=models.CASCADE)
+    routeName = models.CharFIeld(max_length=20)
+
+class RouteLocationMapping(models.Model):
+    routeID = models.ForeignKey(Route)
+    locationID = models.ForeignKey(Location)
 
 class Team(models.Model):
     teamID = models.AutoField(primary_key=True)
