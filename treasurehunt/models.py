@@ -13,18 +13,17 @@ class Task(models.Model):
 
 class Location(models.Model):
     locationID = models.AutoField(primary_key=True)
-    clueID = models.ForeignKey(Clue, on_delete=models.CASCADE) ###Unsure###
+    clueID = models.ForeignKey(Clue, on_delete=models.CASCADE)
     taskID = models.ForeignKey(Task, on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
     address = models.CharField(max_length=255)
 
 class Route(models.Model):
     routeID = models.AutoField(primary_key=True)
-    routeName = models.CharFIeld(max_length=20)
 
 class RouteLocationMapping(models.Model):
-    routeID = models.ForeignKey(Route)
-    locationID = models.ForeignKey(Location)
+    routeID = models.ForeignKey(Route, on_delete=models.CASCADE)
+    locationID = models.ForeignKey(Location, on_delete=models.CASCADE)
 
 class Team(models.Model):
     teamID = models.AutoField(primary_key=True)
@@ -36,3 +35,4 @@ class Game(models.Model):
     routeID = models.ForeignKey(Route, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
     score = models.IntegerField()
+
