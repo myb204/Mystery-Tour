@@ -8,8 +8,6 @@
     <div class="text-center">
         <ul class="nav nav-pills nav-justified">
             <li class="nav-item"><a data-toggle="tab" href="#tab1">General Route</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#tab2">Accessibility Route</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#tab3">Computer Science Route</a></li>
         </ul>
 
         {% if team_list %}
@@ -29,58 +27,6 @@
                                 {% for team in team_list %}
                                     {% if team.routeID.routeID == 1 %}
                                         <tr class="text-centre">
-                                            <th scope="row"></th>
-                                            <td> {{team.teamName}} </td>
-                                            <td> {{team.score}}<td/>
-                                        </tr>
-                                    {% else %}
-                                        <p></p>
-                                    {% endif %}
-                                 {% endfor %}
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="tab2" class="tab-pane">
-                    <table class = "table table-striped text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                {% for team in team_list %}
-                                    {% if team.routeID.routeID == 2 %}
-                                        <tr class="text-centre">
-                                            <th scope="row"></th>
-                                            <td> {{team.teamName}} </td>
-                                            <td> {{team.score}}<td/>
-                                        </tr>
-                                    {% else %}
-                                        <p></p>
-                                    {% endif %}
-                                 {% endfor %}
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="tab3" class="tab-pane">
-                    <table class = "table table-striped text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                {% for team in team_list %}
-                                    {% if team.routeID.routeID == 3 %}
-                                        <tr class="text-left">
                                             <th scope="row"></th>
                                             <td> {{team.teamName}} </td>
                                             <td> {{team.score}}<td/>
