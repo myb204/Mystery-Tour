@@ -1,22 +1,45 @@
 {% extends "treasurehunt/base.html" %}
 {% block content %}
+
+    <head>
+      <title>Bootstrap Example</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </head>
+
+
     <div class="jumbotron text-center">
-        <h1>Leaderboard</h1>
+        <h1>Leaderboards</h1>
     </div>
     <div class="text-center">
+
+        <ul class="nav nav-tabs justify-content-center">
+            <li><a data-toggle="tab" href="#tab1">General Route</a></li>
+            <li><a data-toggle="tab" href="#tab2">Accessibility Route</a></li>
+            <li><a data-toggle="tab" href="#tab3">Computer Science Route</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane active">
+                <h3>General Route Leaderboard Shown Here</h3>
+            </div>
+            <div id="tab2" class="tab-pane">
+                <h3>Accessibility Route Leaderboard Shown Here</h3>
+            </div>
+            <div id="tab3" class="tab-pane">
+                <h3>Computer Science Route Leaderboard Shown Here</h3>
+            </div>
+        </div>
+
         <div class="btn-group">
-                <a class="btn btn-primary btn-lg" role="button" href="#" role="button">
-                    General
-                </a>
-                <a class="btn btn-primary btn-lg" role="button" href="#" role="button">
-                    Accessibility
-                </a>
-                <a class="btn btn-primary btn-lg" role="button" href="#" role="button">
-                    CS
-                </a>
                 <a class="btn btn-primary btn-lg" role="button" href="{% url 'treasurehunt-home' %}" role="button">
-                    Home
+                    Back
                 </a>
         </div>
+
     </div>
+
 {% endblock %}

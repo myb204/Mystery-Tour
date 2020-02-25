@@ -1,0 +1,17 @@
+{% extends "treasurehunt/base.html" %}
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1>How to Play</h1>
+    </div>
+    <div class="text-center">
+        <div>
+            <p>This game works like this...</p>
+        </div>
+        <div class="btn-group-vertical">
+                <a class="btn btn-primary btn-lg" role="button" href="{% url 'treasurehunt-clue' %}" role="button">
+                    First Clue
+                </a>
+
+        </div>
+    </div>
+{% endblock %}
