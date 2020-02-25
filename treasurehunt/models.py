@@ -43,7 +43,7 @@ class Route(models.Model):
 class Team(models.Model):
     teamID = models.IntegerField(primary_key=True)
     teamName = models.CharField(max_length=20)
-    teamMembers = models.IntegerField()
+    teamMembers = models.IntegerField(default=0)
     routeID = models.ForeignKey(Route, on_delete=models.PROTECT, default=1)
     date = models.DateTimeField(default=timezone.now)
     score = models.IntegerField(default=0)

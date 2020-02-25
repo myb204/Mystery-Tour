@@ -6,10 +6,10 @@
     </div>
 
     <div class="text-center">
-        <ul class="nav nav-tabs justify-content-center">
-            <li><a data-toggle="tab" href="#tab1">General Route</a></li>
-            <li><a data-toggle="tab" href="#tab2">Accessibility Route</a></li>
-            <li><a data-toggle="tab" href="#tab3">Computer Science Route</a></li>
+        <ul class="nav nav-pills nav-justified">
+            <li class="nav-item"><a data-toggle="tab" href="#tab1">General Route</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#tab2">Accessibility Route</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#tab3">Computer Science Route</a></li>
         </ul>
 
         {% if team_list %}
@@ -28,7 +28,7 @@
                             <tr>
                                 {% for team in team_list %}
                                     {% if team.routeID.routeID == 1 %}
-                                        <tr class="text-left">
+                                        <tr class="text-centre">
                                             <th scope="row"></th>
                                             <td> {{team.teamName}} </td>
                                             <td> {{team.score}}<td/>
@@ -54,7 +54,7 @@
                             <tr>
                                 {% for team in team_list %}
                                     {% if team.routeID.routeID == 2 %}
-                                        <tr class="text-left">
+                                        <tr class="text-centre">
                                             <th scope="row"></th>
                                             <td> {{team.teamName}} </td>
                                             <td> {{team.score}}<td/>
@@ -97,6 +97,7 @@
         {% else %}
             <p>There are no records for any route.</p>
         {% endif %}
+            <p></p>
         <div class="btn-group">
                 <a class="btn btn-primary btn-lg" role="button" href="{% url 'treasurehunt-home' %}" role="button">
                     Back
