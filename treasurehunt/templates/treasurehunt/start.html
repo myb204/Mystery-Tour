@@ -1,46 +1,27 @@
 {% extends "treasurehunt/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
     <div class="jumbotron text-center">
         <h1>Start Game</h1>
     </div>
     <div class="text-center">
-
-        <form action="/clue" method="get">
-            <div class="form-group">
-                <label>Team Name:</label>
-                <input type="text" class="form-control" id="selectName">
-            </div>
-
-            <div class="form-group">
-                <label>Number of Players:</label>
-                <select class = "form-control" id="selectMembers">
-                    <option value = "1">Singleplayer</option>
-                    <option value = "2">Two Players</option>
-                    <option value = "3">Three Players</option>
-                    <option value = "4">Four Players</option>
-                    <option value = "5">Five Players</option>
-                    <option value = "6">Six Players</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Select Route:</label>
-                <select class = "form-control" id="selectRoute">
-                <option value = "general">General</option>
-                <option value = "accessibility">Accessibility</option>
-                <option value = "computerScience">Computer Science</option>
-                </select>
-            </div>
-
-            <button type="Submit" class="btn btn-default">Submit</button>
-
-        </form>
-
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4"></legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
 
         <div><p></p></div>
 
         <div class="btn-group-vertical">
-                <a class="btn btn-primary btn-lg" role="button" href="{% url 'treasurehunt-home' %}" role="button">
+                <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-home' %}" role="button">
                     Back
                 </a>
         </div>
