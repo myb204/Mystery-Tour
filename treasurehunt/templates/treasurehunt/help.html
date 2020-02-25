@@ -1,0 +1,23 @@
+{% extends "treasurehunt/base.html" %}
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1>Help</h1>
+    </div>
+    <div class="text-center">
+
+        <div class="btn-group-vertical">
+                <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-about' %}" role="button">
+                    About
+                </a>
+                <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-faqs' %}" role="button">
+                    FAQs
+                </a>
+                <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-assistance' %}" role="button">
+                    Request Assistance
+                </a>
+                <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-home' %}" role="button">
+                    Home
+                </a>
+        </div>
+    </div>
+{% endblock %}
