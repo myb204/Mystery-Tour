@@ -6,15 +6,25 @@
     <div class="text-center">
 
         <p>{{ task.taskText }}</p>
-        <p>(form)</p>
+        <p>(answer form goes here)</p>
 
         <div class="btn-group-vertical">
-            <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-info' %}" role="button">
+            <a class="btn btn-outline-info" id="submit" onclick="myFunction()" role="button">
                 Submit
             </a>
-            <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-info' %}" role="button">
-                Skip (+1 min)
+            <a class="btn btn-outline-info" id="skip" onclick="myFunction()" role="button">
+                Skip
             </a>
         </div>
     </div>
+
+    <script>
+    function myFunction() {
+        url = window.location.href;
+        value=url.charAt(url.length-1);
+        newurl = url.substring(0, url.lastIndexOf('t'));
+        window.location.href = (newurl + 'info/' + value);
+    }
+    </script>
+
 {% endblock %}

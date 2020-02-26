@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.views import generic
 
 from .forms import teamForm
-from .models import Team, Task
+from .models import Team, Task, Location, Clue
 
 
 def home(request):
@@ -26,6 +26,15 @@ def assistance(request):
     return render(request, 'treasurehunt/assistance.html')
 
 
+class leaderboard(generic.ListView):
+    model = Team
+    template_name = 'treasurehunt/leaderboard.html'
+
+
+def howtoplay(request):
+    return render(request, 'treasurehunt/howtoplay.html', {'title': 'How to Play'})
+
+
 def start(request):
     if request.method == 'POST':
         form = teamForm(request.POST)
@@ -40,17 +49,17 @@ def start(request):
     return render(request, 'treasurehunt/start.html', {'form': form})
 
 
-class leaderboard(generic.ListView):
-    model = Team
-    template_name = 'treasurehunt/leaderboard.html'
-
-
-def howtoplay(request):
-    return render(request, 'treasurehunt/howtoplay.html', {'title': 'How to Play'})
+def qr(request):
+    return render(request, 'treasurehunt/qr.html', {'title': 'QR'})
 
 
 def clue(request):
     return render(request, 'treasurehunt/clue.html')
+
+
+class ClueDetailView(generic.DetailView):
+    model = Clue
+    template_name = 'treasurehunt/clue.html'
 
 
 def task(request):
@@ -62,12 +71,13 @@ class TaskDetailView(generic.DetailView):
     template_name = 'treasurehunt/task.html'
 
 
-def qr(request):
-    return render(request, 'treasurehunt/qr.html', {'title': 'QR'})
-
-
 def info(request):
     return render(request, 'treasurehunt/info.html', {'title': 'Info'})
+
+
+class InfoDetailView(generic.DetailView):
+    model = Location
+    template_name = 'treasurehunt/info.html'
 
 
 def end(request):

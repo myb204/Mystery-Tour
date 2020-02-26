@@ -6,47 +6,37 @@
     </div>
 
     <div class="text-center">
-        <ul class="nav nav-pills nav-justified active">
-            <li class="nav-item active"><a data-toggle="tab" href="#tab1">General Route</a></li>
-        </ul>
-
         {% if team_list %}
-        <div class="table-responsive">
-            <div class="tab-content">
-                <div id="tab1" class="tab-pane">
-                    <table class = "table table-striped text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                {% for team in team_list %}
-                                    {% if team.routeID == 1 %}
-                                        <tr class="text-centre">
-                                            <td scope="row">{{team.teamName}}</td>
-                                            <td> {{team.score}}<td/>
-                                        </tr>
-                                    {% else %}
-                                        <p></p>
-                                    {% endif %}
-                                 {% endfor %}
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <table class = "table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for team in team_list %}
+                            {% if team.routeID == 1 %}
+                                <tr class="text-centre">
+                                    <td scope="row">{{team.teamName}}</td>
+                                    <td> {{team.score}}<td/>
+                                </tr>
+                            {% else %}
+                                <p></p>
+                            {% endif %}
+                         {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
         {% else %}
             <p>There are no records for any route.</p>
         {% endif %}
-            <p></p>
+        <p></p>
         <div class="btn-group">
-                <a class="btn btn btn-outline-info" role="button" href="{% url 'treasurehunt-home' %}" role="button">
-                    Back
-                </a>
-        </div>
+            <a class="btn btn btn-outline-info" role="button" href="{% url 'treasurehunt-home' %}" role="button">
+                Back
+            </a>
         </div>
     </div>
 

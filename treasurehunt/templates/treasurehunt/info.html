@@ -4,13 +4,23 @@
         <h1>Location Name</h1>
     </div>
     <div class="text-center">
-        <div>
-            <p>This location is used for ___</p>
-        </div>
+
+        <p>{{ location.description }}</p>
+
         <div class="btn-group-vertical">
-                <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-clue' %}" role="button">
+                <a class="btn btn-outline-info" href="#" onclick="myFunction()" role="button">
                     Next Clue
                 </a>
         </div>
     </div>
+
+    <script>
+    function myFunction() {
+        url = window.location.href;
+        value = url.charAt(url.length-1);
+        newurl = url.substring(0, url.lastIndexOf('i'));
+        window.location.href = (newurl + 'clue/' + (++value));
+    }
+    </script>
+
 {% endblock %}
