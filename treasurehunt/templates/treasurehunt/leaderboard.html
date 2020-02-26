@@ -17,7 +17,6 @@
                     <table class = "table table-striped text-center">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Score</th>
                             </tr>
@@ -27,8 +26,7 @@
                                 {% for team in team_list %}
                                     {% if team.routeID.routeID == 1 %}
                                         <tr class="text-centre">
-                                            <th scope="row"></th>
-                                            <td> {{team.teamName}} </td>
+                                            <td scope="row">{{team.teamName}}</td>
                                             <td> {{team.score}}<td/>
                                         </tr>
                                     {% else %}
