@@ -44,6 +44,7 @@ class leaderboard(generic.ListView):
     model = Team
     template_name = 'treasurehunt/leaderboard.html'
 
+
 def howtoplay(request):
     return render(request, 'treasurehunt/howtoplay.html', {'title': 'How to Play'})
 
@@ -55,12 +56,15 @@ def clue(request):
 def task(request):
     return render(request, 'treasurehunt/task.html', {'title': 'Task'})
 
+
 class TaskDetailView(generic.DetailView):
     model = Task
     template_name = 'treasurehunt/task.html'
 
+
 def qr(request):
     return render(request, 'treasurehunt/qr.html', {'title': 'QR'})
+
 
 def info(request):
     return render(request, 'treasurehunt/info.html', {'title': 'Info'})
