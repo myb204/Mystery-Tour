@@ -1,6 +1,4 @@
 import os
-import django_heroku
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -10,13 +8,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'i5awbxb8io1j9*6d!2e6(h*%3z9k^46oc-fj@$r$^o6$f8637e'
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'i5awbxb8io1j9*6d!2e6(h*%3z9k^46oc-fj@$r$^o6$f8637e'
+#SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['djangomysterytour.herokuapp.com']
+ALLOWED_HOSTS = [
+    #'djangomysterytour.herokuapp.com',
+]
 
 # Application definition
 
@@ -40,6 +40,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
 
 ROOT_URLCONF = 'mysterytour.urls'
 
@@ -117,5 +120,4 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-django_heroku.settings(locals())
-
+#django_heroku.settings(locals())
