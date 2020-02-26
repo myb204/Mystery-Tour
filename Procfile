@@ -1,1 +1,1 @@
-web: gunicorn django-deployment.wsgi
+web: gunicorn mysterytour.wsgi
