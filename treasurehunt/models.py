@@ -3,7 +3,7 @@ from django.utils import timezone
 
 
 class Clue(models.Model):
-    clueID = models.Auto21Field(primary_key=True)
+    clueID = models.AutoField(primary_key=True)
     clueText = models.CharField(max_length=255, default="NoClue")
     imageFilePath = models.CharField(max_length=255, default="NoPath")
 
