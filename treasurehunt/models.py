@@ -3,7 +3,7 @@ from django.utils import timezone
 
 
 class Clue(models.Model):
-    clueID = models.IntegerField(primary_key=True)
+    clueID = models.AutoField(primary_key=True)
     clueText = models.CharField(max_length=255, default="NoClue")
     imageFilePath = models.CharField(max_length=255, default="NoPath")
 
@@ -12,7 +12,7 @@ class Clue(models.Model):
 
 
 class Task(models.Model):
-    taskID = models.IntegerField(primary_key=True)
+    taskID = models.AutoField(primary_key=True)
     taskText = models.CharField(max_length=255, default="NoTask")
     taskAnswer = models.CharField(max_length=255, default="NoAnswer")
 
@@ -21,7 +21,7 @@ class Task(models.Model):
 
 
 class Location(models.Model):
-    locationID = models.IntegerField(primary_key=True)
+    locationID = models.AutoField(primary_key=True)
     clueID = models.ForeignKey(Clue, on_delete=models.PROTECT)
     taskID = models.ForeignKey(Task, on_delete=models.PROTECT)
     name = models.CharField(max_length=20, default="NoName")
@@ -33,7 +33,7 @@ class Location(models.Model):
 
 
 class Team(models.Model):
-    teamID = models.IntegerField(primary_key=True)
+    teamID = models.AutoField(primary_key=True)
     teamName = models.CharField(max_length=20)
     teamMembers = models.IntegerField(default=1)
     routeID = models.IntegerField(default=1)
