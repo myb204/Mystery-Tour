@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.views import generic
 
 from .forms import teamForm
-from .models import Team
+from .models import Team, Task
 
 
 def home(request):
@@ -54,6 +54,10 @@ def clue(request):
 
 def task(request):
     return render(request, 'treasurehunt/task.html', {'title': 'Task'})
+
+class TaskDetailView(generic.DetailView):
+    model = Task
+    template_name = 'treasurehunt/task.html'
 
 def qr(request):
     return render(request, 'treasurehunt/qr.html', {'title': 'QR'})

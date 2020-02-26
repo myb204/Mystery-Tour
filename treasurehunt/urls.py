@@ -13,6 +13,7 @@ urlpatterns = [
     path('howtoplay/', views.howtoplay, name='treasurehunt-howtoplay'),
     path('clue/', views.clue, name='treasurehunt-clue'),
     path('task/', views.task, name='treasurehunt-task'),
+    path('task/<int:pk>', views.TaskDetailView.as_view(), name='treasurehunt-task-detail'),
     path('info/', views.info, name='treasurehunt-info'),
     path('end/', views.end, name='treasurehunt-end'),
 ]
