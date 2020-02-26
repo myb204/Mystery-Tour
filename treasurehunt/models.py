@@ -32,19 +32,11 @@ class Location(models.Model):
         return self.name
 
 
-class Route(models.Model):
-    routeID = models.IntegerField(primary_key=True)
-    routeName = models.CharField(max_length=20, default='NoRoute')
-
-    def __str__(self):
-        return str(self.routeID)
-
-
 class Team(models.Model):
     teamID = models.IntegerField(primary_key=True)
     teamName = models.CharField(max_length=20)
     teamMembers = models.IntegerField(default=0)
-    routeID = models.ForeignKey(Route, on_delete=models.PROTECT, default=1)
+    routeID = models.IntegerField(default=1)
     date = models.DateTimeField(default=timezone.now)
     score = models.IntegerField(default=0)
 

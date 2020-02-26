@@ -24,7 +24,7 @@
                         <tbody>
                             <tr>
                                 {% for team in team_list %}
-                                    {% if team.routeID.routeID == 1 %}
+                                    {% if team.routeID == 1 %}
                                         <tr class="text-centre">
                                             <td scope="row">{{team.teamName}}</td>
                                             <td> {{team.score}}<td/>
@@ -43,7 +43,7 @@
         {% endif %}
             <p></p>
         <div class="btn-group">
-                <a class="btn btn-primary btn-lg" role="button" href="{% url 'treasurehunt-home' %}" role="button">
+                <a class="btn btn btn-outline-info" role="button" href="{% url 'treasurehunt-home' %}" role="button">
                     Back
                 </a>
         </div>
