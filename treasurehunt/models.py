@@ -33,7 +33,6 @@ class Location(models.Model):
 
 
 class Team(models.Model):
-    teamID = models.AutoField(primary_key=True)
     teamName = models.CharField(max_length=20)
     teamMembers = models.IntegerField(default=1)
     routeID = models.IntegerField(default=1)
