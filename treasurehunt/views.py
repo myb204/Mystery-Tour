@@ -1,3 +1,4 @@
+from django.http import Http404, HttpResponsePermanentRedirect
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import generic
@@ -82,3 +83,4 @@ class InfoDetailView(generic.DetailView):
 
 def end(request):
     return render(request, 'treasurehunt/end.html', {'title': 'End'})
+

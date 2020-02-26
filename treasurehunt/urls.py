@@ -19,3 +19,4 @@ urlpatterns = [
     path('info/<int:pk>', views.InfoDetailView.as_view(), name='treasurehunt-info-detail'),
     path('end/', views.end, name='treasurehunt-end'),
 ]
+

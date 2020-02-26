@@ -20,11 +20,17 @@
 
     <script>
     function myFunction() {
-        url = window.location.href;
-        value=url.charAt(url.length-1);
+        url = window.location.href
+        split = window.location.href.split('/');
+
+        value = split.pop();
+
+
         newurl = url.substring(0, url.lastIndexOf('t'));
         window.location.href = (newurl + 'info/' + value);
+
     }
+
     </script>
 
 {% endblock %}
