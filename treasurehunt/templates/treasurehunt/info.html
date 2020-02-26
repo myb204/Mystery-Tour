@@ -23,11 +23,11 @@
 
         newurl = url.substring(0, url.lastIndexOf('i'));
 
-        if (value < 15)
+        if (value < 7)
             window.location.href = (newurl + 'clue/' + (++value));
 
         else
-            window.location.href = ('/');
+            window.location.href = (newurl + 'end');
     }
     </script>
 {% endblock %}
