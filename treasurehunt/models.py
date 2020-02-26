@@ -33,9 +33,9 @@ class Location(models.Model):
 
 
 class Team(models.Model):
-    teamID = models.IntegerField()
+    teamID = models.IntegerField(primary_key=True, null=False)
     teamName = models.CharField(max_length=20)
-    teamMembers = models.IntegerField(default=1)
+    teamMembers = models.IntegerField(default=0)
     routeID = models.IntegerField(default=1)
     date = models.DateTimeField(default=timezone.now)
     score = models.IntegerField(default=0)
