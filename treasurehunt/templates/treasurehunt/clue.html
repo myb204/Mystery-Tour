@@ -5,9 +5,11 @@
     </div>
     <div class="text-center">
 
-        <p>Photo goes here</p>
-        <p>{{ clue.clueText }}</p>
+        <img src={{ clue.imageFilePath }} style="width:300px;height:300px;">
+        <div><p> </br> </p></div>
 
+        <h3>{{ clue.clueText }}</h3>
+        <div><p> </br> </p></div>
         <div class="btn-group-vertical">
                 <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-qr' %}" role="button">
                     Scan QR Code
