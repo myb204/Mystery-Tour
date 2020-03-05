@@ -12,15 +12,17 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Score</th>
+                        <th scope="col">Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         {% for team in team_list %}
-                            {% if team.routeID == 1 %}
+                            {% if team.routeID != 1000 %}
                                 <tr class="text-centre">
                                     <td scope="row">{{team.teamName}}</td>
-                                    <td> {{team.score}}<td/>
+                                    <td> {{team.score}}</td>
+                                    <td>{{team.date}}</td>
                                 </tr>
                             {% else %}
                                 <p></p>

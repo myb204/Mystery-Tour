@@ -1,4 +1,5 @@
 {% extends "treasurehunt/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
     <div class="jumbotron text-center">
         <h1>Task</h1>
@@ -6,8 +7,18 @@
     <div class="text-center">
 
         <p>{{ task.taskText }}</p>
-        <p>(answer form goes here)</p>
+        <form method = "POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"></legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Submit</button>
+            </div>
+        </form>
 
+        <!--
         <div class="btn-group-vertical">
             <a class="btn btn-outline-info" id="submit" onclick="myFunction()" role="button">
                 Submit
@@ -16,6 +27,7 @@
                 Skip
             </a>
         </div>
+        -->
     </div>
 
     <script>

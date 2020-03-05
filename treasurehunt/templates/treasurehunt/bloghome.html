@@ -1,0 +1,18 @@
+{% extends "treasurehunt/base.html" %}
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1>Blog: Home</h1>
+    </div>
+    <div class="text-center">
+        <div>
+            <h3>
+                The Views and Opinions expressed here are not shared by the University of Exeter
+            </h3>
+        </div>
+        <div class="btn-group-vertical">
+                <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-home' %}" role="button">
+                    Back
+                </a>
+        </div>
+    </div>
+{% endblock %}
