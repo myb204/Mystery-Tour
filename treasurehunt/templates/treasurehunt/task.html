@@ -18,7 +18,7 @@
             </div>
         </form>
 
-        <!--
+
         <div class="btn-group-vertical">
             <a class="btn btn-outline-info" id="submit" onclick="myFunction()" role="button">
                 Submit
@@ -27,16 +27,14 @@
                 Skip
             </a>
         </div>
-        -->
+
     </div>
 
     <script>
     function myFunction() {
         url = window.location.href
         split = window.location.href.split('/');
-
         value = split.pop();
-
 
         newurl = url.substring(0, url.lastIndexOf('t'));
         window.location.href = (newurl + 'info/' + value);

@@ -1,5 +1,4 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.forms import *
 from treasurehunt.models import Team, Route
 
@@ -11,16 +10,25 @@ class teamForm(ModelForm):
         if data < 1:
             raise ValidationError('Invalid Number of Players. Too Few')
 
-        if data > 6:
+        if data > 10:
             raise ValidationError('Invalid Number of Players. Too Many')
 
         return data
+
+    def getTeamMembers(self):
+        data = self.cleaned_data['teamMembers']
+        return data
+
+    def getSelectedRoute(self):
+        data = self.cleaned_data['routeID']
+        return str(data)
+
 
     class Meta:
         model = Team
         fields = ['teamName', 'teamMembers', 'routeID']
         labels = {'teamName': 'Choose a Team Name',
-                  'teamMembers': 'Number of Players (1-6)',
+                  'teamMembers': 'Number of Players (1-10)',
                   'routeID': 'Select a Route'}
 
 
@@ -41,6 +49,7 @@ class routeForm(ModelForm):
         fields = ['routeName', 'numOfLocations']
         labels = {'routeName': 'Name of your New Route',
                   'numOfLocations': 'Number of Locations (2-20)'}
+
 
 
 class taskForm(forms.Form):

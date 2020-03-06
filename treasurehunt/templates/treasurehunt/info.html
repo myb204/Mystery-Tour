@@ -8,26 +8,22 @@
         <p>{{ location.description }}</p>
 
         <div class="btn-group-vertical">
-                <a class="btn btn-outline-info" href="#" onclick="myFunction()" role="button">
-                    Next Clue
-                </a>
+            <a class="btn btn-outline-info" role="button" href="#" onclick="nextClue( {{ nextClue }}, {{ routeLength }}, {{ progress }} )" role="button">
+               Next
+            </a>
         </div>
     </div>
 
     <script>
-    function myFunction() {
-        url = window.location.href
-        split = window.location.href.split('/');
-
-        value = split.pop();
-
+    function nextClue(clue, length, progress) {
+        url = window.location.href;
         newurl = url.substring(0, url.lastIndexOf('i'));
 
-        if (value < 7)
-            window.location.href = (newurl + 'clue/' + (++value));
+        if (progress < length)
+            window.location.href = (newurl + 'clue/' + clue);
 
         else
-            window.location.href = (newurl + 'end');
+             window.location.href = (newurl + 'end');
     }
     </script>
 {% endblock %}

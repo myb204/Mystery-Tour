@@ -13,18 +13,19 @@
                 You may then progress to the next clue</br></br>
             </p>
         </div>
+
         <div class="btn-group-vertical">
-                <a class="btn btn-outline-info" role="button" href="#" onclick="myFunction()" role="button">
-                    First Clue
-                </a>
+            <a class="btn btn-outline-info" role="button" href="#" onclick="firstClue( {{ firstClue }} )" role="button">
+               First Clue
+            </a>
         </div>
     </div>
 
     <script>
-    function myFunction() {
+    function firstClue(clue) {
         url = window.location.href;
         newurl = url.substring(0, url.lastIndexOf('h'));
-        window.location.href = (newurl + 'clue/' + 1);
+        window.location.href = (newurl + 'clue/' + clue);
     }
     </script>
 

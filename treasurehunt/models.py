@@ -1,20 +1,18 @@
-from __future__ import unicode_literals
-
+#from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 
 
 class Clue(models.Model):
-    clueID = models.IntegerField(primary_key=True)
+
     clueText = models.CharField(max_length=255, default="NoClue")
     imageFilePath = models.CharField(max_length=255, default="NoPath")
 
-    def __str__(self):
-        return self.clueText
+    def __int__(self):
+        return self.id
 
 
 class Task(models.Model):
-    taskID = models.IntegerField(primary_key=True)
     taskText = models.CharField(max_length=255, default="NoTask")
 
     def checkCorrect(self, guess):
@@ -25,10 +23,8 @@ class Task(models.Model):
         else:
             return False
 
-
     def getAnswers(self):
         return Answer.objects.filter(taskID=self)
-
 
     def getAnswersList(self):
         return [(Answer.answerID, Answer.answerText) for answer in Answer.objects.filter(taskID=self)]
@@ -48,7 +44,6 @@ class Answer(models.Model):
 
 
 class Location(models.Model):
-    locationID = models.IntegerField(primary_key=True)
     clueID = models.ForeignKey(Clue, on_delete=models.PROTECT)
     taskID = models.ForeignKey(Task, on_delete=models.PROTECT)
     name = models.CharField(max_length=20, default="NoName")
@@ -63,16 +58,24 @@ class Route(models.Model):
     routeID = models.AutoField(primary_key=True)
     routeName = models.CharField(max_length=255)
     numOfLocations = models.IntegerField(default=1)
+    # locations = models.ManyToManyField('Location')
 
     def __str__(self):
         return self.routeName
 
 
+    def getNextClue(self, currentClue):
+        return [RouteLocationMapping.locationID.clueID for routelocationmapping in
+                RouteLocationMapping.objects.filter(routeID=Team.routeID, orderInRoute=currentClue+1)]
+
+
 class RouteLocationMapping(models.Model):
-    rlmID = models.AutoField(primary_key=True)
     routeID = models.ForeignKey(Route, on_delete=models.CASCADE)
     locationID = models.ForeignKey(Location, on_delete=models.CASCADE)
+    orderInRoute = models.IntegerField(default=0)
 
+    def __str__(self):
+        return str(self.routeID) + " : " + str(self.locationID)
 
 class Team(models.Model):
     teamID = models.AutoField(primary_key=True)

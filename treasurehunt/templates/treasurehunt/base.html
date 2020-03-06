@@ -14,6 +14,19 @@
         <title>Welcome</title>
     {% endif %}</head>
 <body>
+
+    {% if 'teamName' not in request.session %}
+        No team name, no team selected
+    {% else %}
+        Session:<br>
+        Team Name: {{ request.session.teamName }} <br>
+        Team Members: {{ request.session.teamMembers }} <br>
+        Route Selected: {{ request.session.routeID }} <br>
+        Progress through Route: {{ request.session.progress }} <br>
+        Current Location: {{ request.session.currentLocation }}
+
+    {% endif %}
+
     {% if messages %}
         {% for message in message %}
             <div class="alert alert-{{ message.tags }}">
