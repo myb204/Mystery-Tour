@@ -6,40 +6,36 @@
     </div>
 
     <div class="text-center">
-        {% if team_list %}
+        <form method="get">
+            {{ filter.form.as_table }}
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <br>
+        <div>
             <table class = "table table-striped text-center">
-                <thead>
+                 <thead>
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Score</th>
                         <th scope="col">Date</th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        {% for team in team_list %}
-                            {% if team.routeID != 1000 %}
-                                <tr class="text-centre">
-                                    <td scope="row">{{team.teamName}}</td>
-                                    <td> {{team.score}}</td>
-                                    <td>{{team.date}}</td>
-                                </tr>
-                            {% else %}
-                                <p></p>
-                            {% endif %}
-                         {% endfor %}
-                    </tr>
-                </tbody>
-            </table>
-        {% else %}
-            <p>There are no records for any route.</p>
-        {% endif %}
-        <p></p>
+                 </thead>
+                 <tbody>
+                 {% for team in filter.qs %}
+                 <tr class="text-centre">
+                     <td scope="row">{{team.teamName}}</td>
+                     <td> {{team.score}}</td>
+                     <td> {{team.date}} </td>
+                 </tr>
+                 {% endfor %}
+                 </tbody>
+             </table>
+        </div>
+        <br>
         <div class="btn-group">
             <a class="btn btn btn-outline-info" role="button" href="{% url 'treasurehunt-home' %}" role="button">
                 Home
             </a>
         </div>
     </div>
-
 {% endblock %}

@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.home, name='treasurehunt-home'),
     path('start/', views.start, name='treasurehunt-start'),
-    path('leaderboard/', views.leaderboard.as_view(), name='treasurehunt-leaderboard'),
+    path('leaderboard/', views.leaderboard_search, name='treasurehunt-leaderboard'),
     path('help/', views.help, name='treasurehunt-help'),
     path('about/', views.about, name='treasurehunt-about'),
     path('faqs/', views.faqs, name='treasurehunt-faqs'),

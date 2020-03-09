@@ -1,13 +1,11 @@
 from django.shortcuts import render, redirect
-from django.template.loader import render_to_string
 
 from django.contrib import messages
 from django.views import generic
-from django.views.generic import View, FormView, TemplateView
 
-from .forms import teamForm, taskForm, routeForm
+from .forms import teamForm, routeForm
 from .models import Team, Task, Location, Clue, Route, RouteLocationMapping
-
+from .filters import TeamFilter
 
 def home(request):
     return render(request, 'treasurehunt/home.html')
@@ -50,9 +48,11 @@ def start(request):
     return render(request, 'treasurehunt/start.html', {'form': form})
 
 
-class leaderboard(generic.ListView):
-    model = Team
-    template_name = 'treasurehunt/leaderboard.html'
+def leaderboard_search(request):
+    team_list = Team.objects.all()
+    team_filter = TeamFilter(request.GET, queryset=team_list)
+    return render(request, 'treasurehunt/leaderboard.html', {'filter': team_filter})
+
 
 
 def howtoplay(request):
@@ -86,7 +86,6 @@ class InfoDetailView(generic.DetailView):
         route = self.request.session['routeID']
         progress = self.request.session['progress']
         chosenRoute = Route.objects.filter(routeName=route)[0]
-        mapping = 0
 
         if progress < chosenRoute.numOfLocations:
             mapping = RouteLocationMapping.objects.filter(routeID=chosenRoute, orderInRoute=progress+1)[0]
@@ -115,13 +114,10 @@ class ClueDetailView(generic.DetailView):
 
 
 def task(request):
-    # if request.method == 'POST':
-    # form =
     return render(request, 'treasurehunt/task.html', {'title': 'Task'})
 
 
 class TaskDetailView(generic.DetailView):
-    # form = taskForm
     model = Task
     template_name = 'treasurehunt/task.html'
 

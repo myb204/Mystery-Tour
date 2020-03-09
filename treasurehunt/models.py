@@ -1,4 +1,3 @@
-#from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 
@@ -56,9 +55,8 @@ class Location(models.Model):
 
 class Route(models.Model):
     routeID = models.AutoField(primary_key=True)
-    routeName = models.CharField(max_length=255)
+    routeName = models.CharField(max_length=255, unique=True)
     numOfLocations = models.IntegerField(default=1)
-    # locations = models.ManyToManyField('Location')
 
     def __str__(self):
         return self.routeName
