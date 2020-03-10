@@ -32,22 +32,10 @@ class teamForm(ModelForm):
 
 
 class routeForm(ModelForm):
-    def clean_numOfLocations(self):
-        data = self.cleaned_data['numOfLocations']
-
-        if data < 2:
-            raise ValidationError('Invalid Number of Locations. Too Few')
-
-        if data > 20:
-            raise ValidationError('Invalid Number of Locations. Too Many')
-
-        return data
-
     class Meta:
         model = Route
-        fields = ['routeName', 'numOfLocations']
-        labels = {'routeName': 'Name of your New Route',
-                  'numOfLocations': 'Number of Locations (2-20)'}
+        fields = ['routeName']
+        labels = {'routeName': 'Name of your New Route'}
 
 class routeMappingForm(ModelForm):
 

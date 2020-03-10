@@ -139,14 +139,17 @@ def newroute(request):
                                            routeMappingForm,
                                            fields=('locationID',),
                                            can_delete=False,
-                                           extra=5)
+                                           min_num=2,
+                                           extra=10)
     if request.method == 'POST':
         form1 = routeForm(request.POST)
         form2set = mappingFormSet(request.POST, request.FILES)
         if form1.is_valid() and form2set.is_valid():
-            route = form1.save()  # Get route instance
+            route = form1.save(commit=False)  # Get route instance
             form2set = form2set.save(commit=False)  # Save form don't write to database
-
+            route.numOfLocations = len(form2set)  # Set numLocations
+            route.save()
+            
             counter = 1
             for form in form2set:
                 mapObject = form  # Create route mapping object
