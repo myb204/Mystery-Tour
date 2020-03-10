@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import *
-from treasurehunt.models import Team, Route
+from treasurehunt.models import Team, Route, RouteLocationMapping
 
 
 class teamForm(ModelForm):
@@ -22,7 +22,6 @@ class teamForm(ModelForm):
     def getSelectedRoute(self):
         data = self.cleaned_data['routeID']
         return str(data)
-
 
     class Meta:
         model = Team
@@ -50,7 +49,13 @@ class routeForm(ModelForm):
         labels = {'routeName': 'Name of your New Route',
                   'numOfLocations': 'Number of Locations (2-20)'}
 
+class routeMappingForm(ModelForm):
 
+    class Meta:
+        model = RouteLocationMapping
+        fields = ['locationID', 'orderInRoute']
+        labels = {'locationID': 'Location',
+                  'orderInRoute': 'Order'}
 
 class taskForm(forms.Form):
     def __init__(self, Task, *args, **kwargs):

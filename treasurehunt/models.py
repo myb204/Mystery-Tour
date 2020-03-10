@@ -70,7 +70,7 @@ class Route(models.Model):
 class RouteLocationMapping(models.Model):
     routeID = models.ForeignKey(Route, on_delete=models.CASCADE)
     locationID = models.ForeignKey(Location, on_delete=models.CASCADE)
-    orderInRoute = models.IntegerField(default=0)
+    orderInRoute = models.IntegerField(default=1)
 
     def __str__(self):
         return str(self.routeID) + " : " + str(self.locationID)

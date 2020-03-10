@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-
 from django.contrib import messages
 from django.views import generic
+from django.forms import inlineformset_factory
 
-from .forms import teamForm, routeForm
+from .forms import teamForm, routeForm, routeMappingForm
 from .models import Team, Task, Location, Clue, Route, RouteLocationMapping
 from .filters import TeamFilter
+
 
 def home(request):
     return render(request, 'treasurehunt/home.html')
@@ -54,7 +55,6 @@ def leaderboard_search(request):
     return render(request, 'treasurehunt/leaderboard.html', {'filter': team_filter})
 
 
-
 def howtoplay(request):
     context = {
         'Clue': Clue.objects.all(),
@@ -88,7 +88,7 @@ class InfoDetailView(generic.DetailView):
         chosenRoute = Route.objects.filter(routeName=route)[0]
 
         if progress < chosenRoute.numOfLocations:
-            mapping = RouteLocationMapping.objects.filter(routeID=chosenRoute, orderInRoute=progress+1)[0]
+            mapping = RouteLocationMapping.objects.filter(routeID=chosenRoute, orderInRoute=progress + 1)[0]
 
         else:
             mapping = RouteLocationMapping.objects.filter(routeID=chosenRoute, orderInRoute=progress)[0]
@@ -135,18 +135,36 @@ def qr(request):
 
 
 def newroute(request):
+    mappingFormSet = inlineformset_factory(Route, RouteLocationMapping,
+                                           routeMappingForm,
+                                           fields=('locationID',),
+                                           can_delete=False,
+                                           extra=5)
     if request.method == 'POST':
-        form = routeForm(request.POST)
-        if form.is_valid():
-            form.save()
-            routeName = form.cleaned_data.get('routeName')
+        form1 = routeForm(request.POST)
+        form2set = mappingFormSet(request.POST, request.FILES)
+        if form1.is_valid() and form2set.is_valid():
+            route = form1.save()  # Get route instance
+            form2set = form2set.save(commit=False)  # Save form don't write to database
+
+            counter = 1
+            for form in form2set:
+                mapObject = form  # Create route mapping object
+                mapObject.routeID = route  # Assign route to mapping object
+                mapObject.orderInRoute = counter  # Assign a order
+                form.save()  # Save the form to the database
+                counter += 1
+
+            routeName = form1.cleaned_data.get('routeName')
             messages.success(request, f'Route Created: {routeName}')
             return redirect('treasurehunt-home')
 
     else:
-        form = routeForm()
+        form1 = routeForm()
+        form2set = mappingFormSet()
 
-    return render(request, 'treasurehunt/newroute.html', {'form': form})
+    return render(request, 'treasurehunt/newroute.html', {'form1': form1,
+                                                          'form2': form2set})
 
 
 def blog(request):
