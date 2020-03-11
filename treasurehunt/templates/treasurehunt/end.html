@@ -1,22 +1,22 @@
 {% extends "treasurehunt/base.html" %}
 {% block content %}
-    <div class="jumbotron text-center">
-        <h1>Congratulations!</h1>
+    <div class="jumbotron text-center" style="background-color: darkgreen">
+        <h1 style="color: white">Congratulations!</h1>
     </div>
     <div class="text-center">
         <div>
             <h2>
-                Your Score:
+                Your Score: {{ Score }}
             </h2>
         </div>
         <div class="btn-group-vertical">
-                <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-leaderboard' %}" role="button">
+                <a class="btn btn-outline-info my-2" role="button" href="{% url 'treasurehunt-leaderboard' %}" role="button">
                     Leaderboards
                 </a>
-                <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-help' %}" role="button">
+                <a class="btn btn-outline-info my-2" role="button" href="{% url 'treasurehunt-help' %}" role="button">
                     Help
                 </a>
-                <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-home' %}" role="button">
+                <a class="btn btn-outline-info my-2" role="button" href="{% url 'treasurehunt-home' %}" role="button">
                     Home
                 </a>
         </div>

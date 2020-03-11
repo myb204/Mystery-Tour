@@ -1,6 +1,5 @@
-from django import forms
 from django.forms import *
-from treasurehunt.models import Team, Route, RouteLocationMapping
+from treasurehunt.models import Team, Route, Task, Answer, RouteLocationMapping
 
 
 class teamForm(ModelForm):
@@ -23,6 +22,10 @@ class teamForm(ModelForm):
         data = self.cleaned_data['routeID']
         return str(data)
 
+    def getScore(self):
+        data = self.cleaned_data['score']
+        return str(data)
+
     class Meta:
         model = Team
         fields = ['teamName', 'teamMembers', 'routeID']
@@ -37,16 +40,21 @@ class routeForm(ModelForm):
         fields = ['routeName']
         labels = {'routeName': 'Name of your New Route'}
 
-class routeMappingForm(ModelForm):
 
+class routeMappingForm(ModelForm):
     class Meta:
         model = RouteLocationMapping
         fields = ['locationID', 'orderInRoute']
         labels = {'locationID': 'Location',
                   'orderInRoute': 'Order'}
 
+
 class taskForm(forms.Form):
-    def __init__(self, Task, *args, **kwargs):
-        super(taskForm).__init__(*args, **kwargs)
-        choices = [x for x in Task.getAnswersList()]
-        self.fields["Answers"] = forms.ChoiceField(choices=choices, widget=RadioSelect)
+    def __init__(self, task, *args, **kwargs):
+        super(taskForm, self).__init__(*args, **kwargs)
+
+        currentAnswers = [x for x in task.getAnswersList()]
+        print(task)
+        print(currentAnswers)
+
+        self.fields['answers'] = ChoiceField(choices=currentAnswers, widget=RadioSelect)

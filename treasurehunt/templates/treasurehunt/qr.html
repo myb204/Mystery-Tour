@@ -8,11 +8,24 @@
 	<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 </head>
 <body>
-    <div class="jumbotron text-center">
-        <h1>Scan the next QR code to start the next task</h1>
+    <div class="jumbotron text-center" style="background-color: darkgreen">
+        <h1 style="color: white">Scan the QR Code</h1>
     </div>
 
-    <video id="preview"></video>
+    <div class="text-center">
+        <div class="btn-group-vertical">
+            <video id="preview"></video>
+            <a class="btn btn-outline-info my-3" role="button" href="{% url 'treasurehunt-home' %}" role="button">
+            Quit
+            </a>
+        </div>
+    </div>
+
+
+
+
+
+
     <script type="text/javascript">
       var scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {

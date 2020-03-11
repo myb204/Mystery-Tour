@@ -1,11 +1,10 @@
 {% extends "treasurehunt/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-
-    <div class="jumbotron text-center">
-        <h1>Add a New Route</h1>
+    <div class="jumbotron text-center" style="background-color: darkgreen">
+        <h2 style="color: white">Add a New Route</h2>
+        <h4 style="color: white">Enter a Minimum of 2 Locations</h4>
     </div>
-
     <div class="text-center">
         <div class="content-section">
             <form method="POST">
@@ -23,8 +22,6 @@
                 </div>
             </form>
         </div>
-
-        <div><p></p></div>
 
         <div class="btn-group-vertical">
                 <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-home' %}" role="button">

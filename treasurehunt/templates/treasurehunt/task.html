@@ -1,14 +1,15 @@
 {% extends "treasurehunt/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="jumbotron text-center">
-        <h1>Task</h1>
+    <div class="jumbotron text-center" style="background-color: darkgreen">
+        <h1 style="color: white">Task</h1>
     </div>
-    <div class="text-center">
 
+    <div class="text-center">
         <p>{{ task.taskText }}</p>
-        <form method = "POST">
+        <form action="" method="post">
             {% csrf_token %}
+
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4"></legend>
                 {{ form|crispy }}
@@ -18,29 +19,22 @@
             </div>
         </form>
 
-
         <div class="btn-group-vertical">
-            <a class="btn btn-outline-info" id="submit" onclick="myFunction()" role="button">
-                Submit
-            </a>
-            <a class="btn btn-outline-info" id="skip" onclick="myFunction()" role="button">
-                Skip
+            <a class="btn btn-outline-info my-2" id="skip" onclick="skip()" role="button">
+            Skip
             </a>
         </div>
-
     </div>
 
     <script>
-    function myFunction() {
-        url = window.location.href
-        split = window.location.href.split('/');
+    function skip() {
+        url = window.location.href;
+        noSlash = url.substring(0, url.lastIndexOf('/'));
+        split = noSlash.split('/');
         value = split.pop();
-
         newurl = url.substring(0, url.lastIndexOf('t'));
         window.location.href = (newurl + 'info/' + value);
-
     }
-
     </script>
 
 {% endblock %}

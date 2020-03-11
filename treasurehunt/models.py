@@ -1,9 +1,9 @@
+# from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 
 
 class Clue(models.Model):
-
     clueText = models.CharField(max_length=255, default="NoClue")
     imageFilePath = models.CharField(max_length=255, default="NoPath")
 
@@ -15,31 +15,30 @@ class Task(models.Model):
     taskText = models.CharField(max_length=255, default="NoTask")
 
     def checkCorrect(self, guess):
-        answer = Answer.objects.get(answerid=guess)
+        answer = Answer.objects.get(id=guess)
 
         if answer.correct is True:
             return True
         else:
             return False
 
-    def getAnswers(self):
-        return Answer.objects.filter(taskID=self)
-
     def getAnswersList(self):
-        return [(Answer.answerID, Answer.answerText) for answer in Answer.objects.filter(taskID=self)]
+        return [(answer.id, answer.answerText) for answer in self.randomOrder(Answer.objects.filter(taskID=self))]
+
+    def randomOrder(self, queryset):
+        return queryset.order_by('?')
 
     def __str__(self):
         return self.taskText
 
 
 class Answer(models.Model):
-    answerID = models.AutoField(primary_key=True)
     taskID = models.ForeignKey(Task, on_delete=models.CASCADE)
     answerText = models.CharField(max_length=50)
     correct = models.BooleanField(blank=False, default=False)
 
     def __str__(self):
-        return self.answerText
+        return str(self.answerText)
 
 
 class Location(models.Model):
@@ -50,21 +49,22 @@ class Location(models.Model):
     description = models.CharField(max_length=255, default="NoDescription")
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class Route(models.Model):
     routeID = models.AutoField(primary_key=True)
-    routeName = models.CharField(max_length=255, unique=True)
+    routeName = models.CharField(max_length=255)
     numOfLocations = models.IntegerField(default=1)
+
+    # locations = models.ManyToManyField('Location')
 
     def __str__(self):
         return self.routeName
 
-
     def getNextClue(self, currentClue):
         return [RouteLocationMapping.locationID.clueID for routelocationmapping in
-                RouteLocationMapping.objects.filter(routeID=Team.routeID, orderInRoute=currentClue+1)]
+                RouteLocationMapping.objects.filter(routeID=Team.routeID, orderInRoute=currentClue + 1)]
 
 
 class RouteLocationMapping(models.Model):
@@ -74,6 +74,7 @@ class RouteLocationMapping(models.Model):
 
     def __str__(self):
         return str(self.routeID) + " : " + str(self.locationID)
+
 
 class Team(models.Model):
     teamID = models.AutoField(primary_key=True)

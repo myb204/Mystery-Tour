@@ -1,14 +1,14 @@
 {% extends "treasurehunt/base.html" %}
 {% block content %}
 
-    <div class="jumbotron text-center">
-        <h1>Leaderboards</h1>
+    <div class="jumbotron text-center" style="background-color: darkgreen">
+        <h1 style="color: white">Leaderboards</h1>
     </div>
 
     <div class="text-center">
         <form method="get">
             {{ filter.form.as_table }}
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-outline-info my-2">Filter</button>
         </form>
         <br>
         <div>

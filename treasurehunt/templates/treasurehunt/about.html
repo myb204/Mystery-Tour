@@ -1,29 +1,34 @@
 {% extends "treasurehunt/base.html" %}
 {% block content %}
-    <div class="jumbotron text-center">
-        <h1>About</h1>
+    <div class="jumbotron text-center" style="background-color: darkgreen">
+        <h1 style="color: white">About</h1>
     </div>
-    <div class="text-center">
+    <div style="padding:20px;text-align:justify">
         <div>
-            <h3>
+            <h5>
                 The Mystery Tour web app allows students to navigate the University of Exeter campus when
                 they first join. The treasure hunt will take players around many locations relevant to
                 freshers, including department-specific facilities.
-            </h3>
-            <h4>
-                <br/>Developers:<br/><br/>
+            </h5>
+
+
+        </div>
+
+        <div class="text-center">
+            <h5>
+                <br/>Development Team:<br/><br/>
                 Thomas Moore<br/>
                 Ethan Martin<br/>
                 Yusuf Mirza Baig<br/>
                 Gyan Saney<br/>
                 Jay Odedra<br/>
                 Oliver Jagger<br/><br/>
-            </h4>
-        </div>
+            </h5>
         <div class="btn-group-vertical">
-                <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-help' %}" role="button">
-                    Back
-                </a>
+            <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-help' %}" role="button">
+                Back
+            </a>
+        </div>
         </div>
     </div>
 {% endblock %}

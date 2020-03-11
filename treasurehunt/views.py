@@ -1,9 +1,13 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib import messages
+from django.views.generic import DetailView, FormView
+from django.views.generic.edit import FormMixin
 from django.views import generic
 from django.forms import inlineformset_factory
 
-from .forms import teamForm, routeForm, routeMappingForm
+from .forms import teamForm, routeForm, taskForm, routeMappingForm
 from .models import Team, Task, Location, Clue, Route, RouteLocationMapping
 from .filters import TeamFilter
 
@@ -41,7 +45,6 @@ def start(request):
             request.session['routeID'] = routeID
             request.session['progress'] = 0
 
-            messages.success(request, f'Team created: {teamName}')
             return redirect('treasurehunt-howtoplay')
     else:
         form = teamForm()
@@ -55,13 +58,25 @@ def leaderboard_search(request):
     return render(request, 'treasurehunt/leaderboard.html', {'filter': team_filter})
 
 
+def end(request):
+    context = {
+        'Score': request.session['score']
+    }
+
+    name = request.session['teamName']
+    team = Team.objects.filter(teamName=name)[0]
+    team.score = request.session['score']
+    team.save()
+
+    return render(request, 'treasurehunt/end.html', context)
+
+
 def howtoplay(request):
     context = {
         'Clue': Clue.objects.all(),
     }
 
     route = request.session['routeID']
-
     chosenRoute = Route.objects.filter(routeName=route)[0]
     firstMapping = RouteLocationMapping.objects.filter(routeID=chosenRoute, orderInRoute=1)[0]
     firstClue = firstMapping.locationID.clueID.id
@@ -70,6 +85,7 @@ def howtoplay(request):
     # Setting currentLocation session variable to be 1
     request.session['currentLocation'] = firstClue
     request.session['progress'] = 1
+    request.session['score'] = 0
 
     return render(request, 'treasurehunt/howtoplay.html', context)
 
@@ -88,7 +104,7 @@ class InfoDetailView(generic.DetailView):
         chosenRoute = Route.objects.filter(routeName=route)[0]
 
         if progress < chosenRoute.numOfLocations:
-            mapping = RouteLocationMapping.objects.filter(routeID=chosenRoute, orderInRoute=progress + 1)[0]
+            mapping = RouteLocationMapping.objects.filter(routeID=chosenRoute, orderInRoute=progress+1)[0]
 
         else:
             mapping = RouteLocationMapping.objects.filter(routeID=chosenRoute, orderInRoute=progress)[0]
@@ -113,17 +129,53 @@ class ClueDetailView(generic.DetailView):
     template_name = 'treasurehunt/clue.html'
 
 
-def task(request):
-    return render(request, 'treasurehunt/task.html', {'title': 'Task'})
-
-
-class TaskDetailView(generic.DetailView):
+class TaskDetailView(FormMixin, DetailView):
     model = Task
     template_name = 'treasurehunt/task.html'
+    form_class = taskForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Location'] = Location.objects.all()
+        return context
 
-def end(request):
-    return render(request, 'treasurehunt/end.html', {'title': 'End'})
+    def get_form(self, *args, **kwargs):
+        currentLocation = self.request.session['currentLocation']
+        currentTask = Task.objects.filter(id=currentLocation)[0]
+        self.task = currentTask
+        form_class = self.form_class
+
+        return form_class(**self.get_form_kwargs())
+
+    def get_form_kwargs(self):
+        kwargs = super(TaskDetailView, self).get_form_kwargs()
+        return dict(kwargs, task=self.task)
+
+    def form_valid(self, form):
+        guess = form.cleaned_data['answers']
+        isCorrect = self.task.checkCorrect(guess)
+
+        if isCorrect:
+            self.request.session['score'] += 10
+            nextInfo = self.get_success_url()
+            return HttpResponseRedirect(nextInfo)
+
+        return super(TaskDetailView, self).get(self, self.request)
+
+    def get_success_url(self):
+        return reverse('treasurehunt-info-detail', kwargs={'pk': self.object.pk})
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+
+        if form.is_valid():
+            print("got to valid")
+            return self.form_valid(form)
+        else:
+            print("got to invalid")
+            self.request.session['score'] -= 1
+            return self.form_invalid(form)
 
 
 def admin(request):
@@ -149,7 +201,7 @@ def newroute(request):
             form2set = form2set.save(commit=False)  # Save form don't write to database
             route.numOfLocations = len(form2set)  # Set numLocations
             route.save()
-            
+
             counter = 1
             for form in form2set:
                 mapObject = form  # Create route mapping object
