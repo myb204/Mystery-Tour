@@ -53,7 +53,7 @@ def start(request):
 
 
 def leaderboard_search(request):
-    team_list = Team.objects.all()[:10]
+    team_list = Team.objects.all()
     team_filter = TeamFilter(request.GET, queryset=team_list)
     return render(request, 'treasurehunt/leaderboard.html', {'filter': team_filter})
 
