@@ -7,6 +7,7 @@ class Clue(models.Model):
     clueText = models.CharField(max_length=255, default="NoClue")
     imageFilePath = models.CharField(max_length=255, default="NoPath")
 
+
     def __int__(self):
         return self.id
 
