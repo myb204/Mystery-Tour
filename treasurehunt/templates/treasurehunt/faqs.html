@@ -1,16 +1,60 @@
 {% extends "treasurehunt/base.html" %}
 {% block content %}
     <div class="jumbotron text-center" style="background-color: darkgreen">
-        <h1 style="color: white">Frequently Asked Questions</h1>
+        <h1 style="color: white">Useful Links</h1>
     </div>
-    <div class="text-center" style="padding:10px">
-        <div>
-            <h5>1: What is the Mystery Tour App?</h5>
-            <p>This app</p>
+    <div class="text-center">
+        <div style="padding:35px;text-align:justify">
+            <h5>1: New Students</h5>
+            <p> This is where you learn more about University life, Fresher's Week and general student support
+            and services for new students.</p>
+            <a href="https://exeter.ac.uk/newstudents/">New Students Website</a>
+            <p><br></p>
+
+            <h5>2: Accommodation</h5>
+            <p> Here you can learn about the different types of accommodation available to new students, the locations
+             of each and the facilitates in the various halls and villages.</p>
+            <a href="https://www.exeter.ac.uk/accommodation/">Accommodation Website</a>
+            <p><br></p>
+
+            <h5>3: The SID Desk</h5>
+            <p> This is where you can talk to people from the University about any problems or
+                enquiries you may have. Enquiries about courses, exams, finance, student services,
+                IT support and UniCards can be made. The Library and Forum Marketplace can be found
+                very nearby.</p>
+            <a href="https://www.exeter.ac.uk/sid/">Visit the SID Website Here</a>
+            <p><br></p>
+
+            <h5>4: The Forum Library</h5>
+            <p> This is where you can order, reserve and take out books for academic purposes. The library also
+                offers audiobooks, films and software.</p>
+            <a href="https://www.exeter.ac.uk/library/">Visit the Library Website Here</a>
+            <p><br></p>
+
+            <h5>5: Department Info Point and Hubs</h5>
+            <p>Specific Advise for the Following Disciplines:</p>
+            <a href="https://www.exeter.ac.uk/library/">Info at Amory</a><br>
+            <p>History, Classics, Ancient History, Theology and Religion, Liberal Arts, Archaeology, Politics,
+            International Relations, Sociology, Philosophy, Antropology, Law, Geography</p>
+            <a href="http://emps.exeter.ac.uk/">Info at Harrison Info</a><br>
+            <p>Engineering, Mathematics, Computer Sciences</p>
+            <a href="http://lifesciences.exeter.ac.uk/">Info at Peter Chalk</a><br>
+            <p>Physics, Biosciences, Natural Sciences, Flexible Combined Honours, Arab and Islamic Studies</p>
+            <a href="https://humanities.exeter.ac.uk/">Info at Queen's</a><br>
+            <p>Art History, Visual Culture, Drama, English, Film Studies, Modern Languages</p>
+            <a href="https://business-school.exeter.ac.uk/">Info at Building One</a><br>
+            <p>Business Studios, Management, Economics</p>
+            <a href="http://psychology.exeter.ac.uk/">Info at Washington Singer</a><br>
+            <p>Psychology</p>
+            <a href="https://humanities.exeter.ac.uk/drama">Info at Thornlea</a><br>
+            <p>Drama</p>
+            <p><br></p>
+
+
 
         </div>
         <div class="btn-group-vertical">
-                <a class="btn btn-outline-info" role="button" href="{% url 'treasurehunt-help' %}" role="button">
+                <a class="btn btn-outline-info my-2" role="button" href="{% url 'treasurehunt-help' %}" role="button">
                     Back
                 </a>
         </div>

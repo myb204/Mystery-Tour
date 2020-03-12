@@ -1,4 +1,3 @@
-# from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 
@@ -6,7 +5,6 @@ from django.utils import timezone
 class Clue(models.Model):
     clueText = models.CharField(max_length=255, default="NoClue")
     imageFilePath = models.CharField(max_length=255, default="NoPath")
-
 
     def __int__(self):
         return self.id
@@ -55,7 +53,7 @@ class Location(models.Model):
 
 class Route(models.Model):
     routeID = models.AutoField(primary_key=True)
-    routeName = models.CharField(max_length=255)
+    routeName = models.CharField(max_length=255, unique=True)
     numOfLocations = models.IntegerField(default=1)
 
     # locations = models.ManyToManyField('Location')
@@ -79,7 +77,7 @@ class RouteLocationMapping(models.Model):
 
 class Team(models.Model):
     teamID = models.AutoField(primary_key=True)
-    teamName = models.CharField(max_length=20)
+    teamName = models.CharField(max_length=20, unique=True)
     teamMembers = models.IntegerField(default=0)
     routeID = models.ForeignKey(Route, on_delete=models.PROTECT)
     date = models.DateTimeField(default=timezone.now)

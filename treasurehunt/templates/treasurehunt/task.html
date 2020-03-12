@@ -7,9 +7,10 @@
 
     <div class="text-center">
         <p>{{ task.taskText }}</p>
+        <p>Progress through Route: {{ request.session.progress }}</p><br>
+        <p></p>
         <form action="" method="post">
             {% csrf_token %}
-
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4"></legend>
                 {{ form|crispy }}
@@ -23,15 +24,12 @@
             <a class="btn btn-outline-info my-2" id="skip" onclick="skip()" role="button">
             Skip
             </a>
-            <div>
-            <textarea id="display-area" style="font-size: 18px; color:chartreuse; height:50px; background-color: black; padding-left:25px; padding-right: 25px;  width:200px; border: groove; border-width: 4px; border-color: goldenrod; border-radius: 3px; resize:none; overflow:hidden">00:00.000</textarea>
-            </div>
-            <input id="stop_btn" type="button" value="stop">
-        </div>
+        <div>
     </div>
 
     <script>
     function skip() {
+        alert(prog);
         url = window.location.href;
         noSlash = url.substring(0, url.lastIndexOf('/'));
         split = noSlash.split('/');
@@ -39,98 +37,6 @@
         newurl = url.substring(0, url.lastIndexOf('t'));
         window.location.href = (newurl + 'info/' + value);
     }
-        
-        
-    var timer;
-var startTime;
-var timerState;
-var stopTime;
-var scoretotal;
-
-function start() {
-    localStorage.getItem('timerState', timerState);
-    localStorage.getItem('stopTime', stopTime);
-    if (timerState == null) {
-        timerState = 'true';
-        localStorage.setItem('timerState', timerState);
-        startTime = parseInt(localStorage.getItem('startTime') || Date.now());
-        localStorage.setItem('startTime', startTime);
-        timer = setInterval(clockTick, 100);
-    } else {
-        var display = document.getElementById("display-area");
-        stopTime = display.innerHTML;
-    }
-
-}
-
-function stop() {
-    timerState = 'false';
-    localStorage.setItem('timerState', timerState);
-    clearInterval(timer);
-    stopTime = document.getElementById("display-area").innerHTML;
-    localStorage.setItem('stopTime', stopTime);
-
-}
-
-function reset() {
-  clearInterval(timer);
-  localStorage.removeItem('startTime');
-  document.getElementById('display-area').innerHTML = "00:00.000";
-}
-
-function clockTick() {
-  var currentTime = Date.now(),
-    timeElapsed = new Date(currentTime - startTime),
-    mins = timeElapsed.getUTCMinutes(),
-    secs = timeElapsed.getUTCSeconds(),
-    ms = timeElapsed.getUTCMilliseconds(),
-    display = document.getElementById("display-area");
-
-  display.innerHTML =
-    (mins > 9 ? mins : "0" + mins) + ":" +
-    (secs > 9 ? secs : "0" + secs) + "." +
-    (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms);
-
-}
-
-var stopBtn = document.getElementById('stop_btn');
-
-stopBtn.addEventListener('click', function() {
-  stop();
-  localStorage.getItem('stopTime');
-  alert(stopTime);
-    var score = parseInt((stopTime.substring(0,2))*60) + parseInt(stopTime.substring(3,5));
-    scoretotal += score;
-    localStorage.setItem('scoretotal', scoretotal);
-
-  alert("you scored this many points:" + score);
-  alert("your score total:  " + scoretotal)
-  window.location.replace("http://127.0.0.1:8000/help/");
-
-})
-    
-reset();
-start();
-
-   var counter = localStorage.getItem('scoretotal');
-   alert(counter);
-
-  $( document ).ready(function() {
-     function onchange (evt) {
-         counter = counter;
-       $.ajax({
-         url: '/update_counter/',
-         data: {'counter': counter},
-         type: 'POST'
-       }).done(function(response){
-         console.log(response);
-       });
-     }
-
-     window.onblur = onchange;
-
-   });
-        
     </script>
 
 {% endblock %}

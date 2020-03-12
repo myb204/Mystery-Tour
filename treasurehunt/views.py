@@ -44,7 +44,6 @@ def start(request):
             request.session['teamMembers'] = teamMembers
             request.session['routeID'] = routeID
             request.session['progress'] = 0
-
             return redirect('treasurehunt-howtoplay')
     else:
         form = teamForm()
@@ -137,6 +136,7 @@ class TaskDetailView(FormMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['Location'] = Location.objects.all()
+        context['progress'] = self.request.session['progress']
         return context
 
     def get_form(self, *args, **kwargs):
@@ -159,6 +159,8 @@ class TaskDetailView(FormMixin, DetailView):
             self.request.session['score'] += 10
             nextInfo = self.get_success_url()
             return HttpResponseRedirect(nextInfo)
+        else:
+            self.request.session['score'] -= 5
 
         return super(TaskDetailView, self).get(self, self.request)
 
