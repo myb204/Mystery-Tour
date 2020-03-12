@@ -17,4 +17,20 @@
         <p class="article-content">{{ object.content }}</p>
       </div>
     </article>
+    <a class="btn btn-default" href="{% url 'post-comment' pk=post.pk %}">Add comment</a>
+    <div>
+        {% for comment in post.comments.all %}
+            {% if user.is_authenticated %}
+            <div class="comment">
+                <div class="date">
+                    {{ comment.created_on }}
+                </div>
+                <strong>{{ comment.name }}</strong>
+                <p>{{ comment.body }}</p>
+            </div>
+            {% endif %}
+        {% empty %}
+            <p>No comments here yet :(</p>
+        {% endfor %}
+    </div>
 {% endblock content %}
