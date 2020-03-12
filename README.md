@@ -15,3 +15,6 @@ Developers - members of the development team have access to the shared code repo
 
 
 
+requirements.txt
+
+instructions to see hosted copy/run a local copy
