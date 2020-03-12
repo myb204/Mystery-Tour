@@ -19,8 +19,7 @@
     </article>
     <a class="btn btn-default" href="{% url 'post-comment' pk=post.pk %}">Add comment</a>
     <div>
-        {% for comment in object.comments.all %}
-            {% if user.is_authenticated %}
+        {% for comment in post.comments.all %}
                 <div class="comment">
                     <div class="date">
                         {{ comment.created_on }}
@@ -28,7 +27,6 @@
                     <strong>{{ comment.name }}</strong>
                     <p>{{ comment.body }}</p>
                 </div>
-            {% endif %}
         {% empty %}
             <p>No comments here yet :(</p>
         {% endfor %}
