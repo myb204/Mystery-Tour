@@ -14,7 +14,36 @@ Game Keepers - these users are able to log in to the Django Administrator site. 
 Developers - members of the development team have access to the shared code repository hosted on GitHub.
 
 
+Requirements.txt must be run to install the prerequisites:
+PIL
+django-filter
+asgiref==3.2.3
+certifi==2019.11.28
+chardet==3.0.4
+dj-database-url==0.5.0
+Django==3.0.3
+django-crispy-forms==1.8.1
+django-heroku==0.3.1
+idna==2.9
+psycopg2==2.8.4
+pytz==2019.3
+requests==2.23.0
+sqlparse==0.3.0
+urllib3==1.25.8
+whitenoise==5.0.1
 
-requirements.txt
 
-instructions to see hosted copy/run a local copy
+Instructions to run a local copy
+1. Navigate to technical-documents directory in a Python Virtual Environment with all of requirements.txt installed
+2. python manage.py runserver
+3. Navigate to localhost (likely 127.0.0.1:8000) in a web browser
+4. If changes to database models are made:
+	python manage.py makemigrations
+	python manage.py migrate
+	python manage.py runserver
+  
+  
+Hosted copy:
+https://exetermysterytour.herokuapp.com/
+
+
