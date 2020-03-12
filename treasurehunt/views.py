@@ -223,6 +223,3 @@ def newroute(request):
     return render(request, 'treasurehunt/newroute.html', {'form1': form1,
                                                           'form2': form2set})
 
-
-def blog(request):
-    return render(request, 'treasurehunt/bloghome.html', {'title': 'Blog: Home'})

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from blog import views as views2
 
 urlpatterns = [
     path('', views.home, name='treasurehunt-home'),
@@ -10,10 +11,10 @@ urlpatterns = [
     path('faqs/', views.faqs, name='treasurehunt-faqs'),
     path('assistance/', views.assistance, name='treasurehunt-assistance'),
     path('howtoplay/', views.howtoplay, name='treasurehunt-howtoplay'),
+    path('blog/', views2.home, name='blog-home'),
     path('qr/', views.qr, name='treasurehunt-qr'),
     path('newroute/', views.newroute, name='treasurehunt-newroute'),
     path('admin/', views.admin, name='treasurehunt-admin'),
-    path('blog/', views.blog, name='treasurehunt-blog'),
     path('clue/<int:pk>/', views.ClueDetailView.as_view(), name='treasurehunt-clue-detail'),
     path('task/<int:pk>/', views.TaskDetailView.as_view(), name='treasurehunt-task-detail'),
     path('info/<int:pk>/', views.InfoDetailView.as_view(), name='treasurehunt-info-detail'),
