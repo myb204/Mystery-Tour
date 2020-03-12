@@ -20,7 +20,7 @@
     </article>
 
     <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-comment' pk=post.pk %}">Add comment</a>
-    <div><br>
+    <div style="padding-bottom:50px"><br>
         {% for comment in post.comments.all %}
                 <div class="border" style="padding:10px" >
                     <div class="date">
