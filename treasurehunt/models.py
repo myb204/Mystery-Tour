@@ -56,8 +56,6 @@ class Route(models.Model):
     routeName = models.CharField(max_length=255, unique=True)
     numOfLocations = models.IntegerField(default=1)
 
-    # locations = models.ManyToManyField('Location')
-
     def __str__(self):
         return self.routeName
 
