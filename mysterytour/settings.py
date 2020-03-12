@@ -15,7 +15,7 @@ SECRET_KEY = 'i5awbxb8io1j9*6d!2e6(h*%3z9k^46oc-fj@$r$^o6$f8637e'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    #'djangomysterytour.herokuapp.com',
+    'djangomysterytour.herokuapp.com',
 ]
 
 # Application definition
