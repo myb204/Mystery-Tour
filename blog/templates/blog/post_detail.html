@@ -12,7 +12,7 @@
           </div>
           {% endif %}
         </div><br>
-        <div class="border" style="padding:10px">
+        <div class="border shadow-sm p-3 mb-5 bg-white rounded" style="padding:10px">
             <h2>{{ object.title }}</h2>
             <p>{{ object.content }}</p>
         </div><br>
@@ -22,7 +22,7 @@
     <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-comment' pk=post.pk %}">Add comment</a>
     <div style="padding-bottom:50px"><br>
         {% for comment in post.comments.all %}
-                <div class="border" style="padding:10px" >
+                <div class="border shadow-sm p-3 mb-1 bg-white rounded" style="padding:10px" >
                     <div class="date">
                         {{ comment.created_on }}
                     </div>

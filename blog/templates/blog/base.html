@@ -18,22 +18,14 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="{% url 'blog-home' %}">Blog</a>
+      <a class="navbar-brand" href="{% url 'blog-home' %}">Home</a>
+      <a class="navbar-brand" href="{% url 'treasurehunt-home' %}">Game</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'blog-home' %}">Blog Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'treasurehunt-home' %}">Return to Game</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'blog-about' %}">About</a>
-          </li>
           {% if user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'post-create' %}">Post</a>
@@ -55,6 +47,13 @@
         </ul>
       </div>
     </nav>
+    <div style="padding:10px">
+        <p class="text-center">
+            <strong>The views expressed here are not endorsed by the university</strong><br>
+            You must login to make a post<br>
+            You can comment on posts anonymously
+        </p>
+    </div>
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">

@@ -3,6 +3,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
+"""
+View to register a user
+"""
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -15,6 +18,9 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
 
+"""
+View to see a users profile requiring a login register
+"""
 @login_required
 def profile(request):
 

@@ -12,10 +12,10 @@ SECRET_KEY = 'i5awbxb8io1j9*6d!2e6(h*%3z9k^46oc-fj@$r$^o6$f8637e'
 #SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    'djangomysterytour.herokuapp.com',
+    #'djangomysterytour.herokuapp.com',
 ]
 
 # Application definition
