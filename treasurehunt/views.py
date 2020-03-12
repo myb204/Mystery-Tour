@@ -11,7 +11,9 @@ from .forms import teamForm, routeForm, taskForm, routeMappingForm
 from .models import Team, Task, Location, Clue, Route, RouteLocationMapping
 from .filters import TeamFilter
 
-
+""""
+These functions return calls to render the corresponding page based on the user's request
+"""
 def home(request):
     return render(request, 'treasurehunt/home.html')
 
@@ -31,7 +33,11 @@ def faqs(request):
 def assistance(request):
     return render(request, 'treasurehunt/assistance.html')
 
-
+"""
+This method handles the form data when the user starts a new game.
+The cleaned data is retrieved from the form and the sessions for that game are established.
+If the form was given invalid data, the empty form is returned and the user is informed of what to change.
+"""
 def start(request):
     if request.method == 'POST':
         form = teamForm(request.POST)
@@ -50,13 +56,17 @@ def start(request):
 
     return render(request, 'treasurehunt/start.html', {'form': form})
 
-
+"""
+This method allows the filtering of different routes on the leaderboard tables
+"""
 def leaderboard_search(request):
     team_list = Team.objects.all()
     team_filter = TeamFilter(request.GET, queryset=team_list)
     return render(request, 'treasurehunt/leaderboard.html', {'filter': team_filter})
 
-
+"""
+This method writes a team's score to the database after having finished the game
+"""
 def end(request):
     context = {
         'Score': request.session['score']
@@ -69,7 +79,9 @@ def end(request):
 
     return render(request, 'treasurehunt/end.html', context)
 
-
+"""
+This method establishes the first clue to be given to the user after they successfully add their team
+"""
 def howtoplay(request):
     context = {
         'Clue': Clue.objects.all(),
@@ -88,7 +100,9 @@ def howtoplay(request):
 
     return render(request, 'treasurehunt/howtoplay.html', context)
 
-
+"""
+This class-based view allows different information pages to be presented based on the current location
+"""
 class InfoDetailView(generic.DetailView):
     model = Location
     template_name = 'treasurehunt/info.html'
@@ -122,12 +136,17 @@ class InfoDetailView(generic.DetailView):
 
         return context
 
-
+"""
+This class-based view allows different clue pages to be presented based on the current location.
+"""
 class ClueDetailView(generic.DetailView):
     model = Clue
     template_name = 'treasurehunt/clue.html'
 
-
+"""
+This class-based view allows different task pages to be presented based on the current location.
+It also handles the taskForm to present the user with multiple-choice answers for that task dynamically.
+"""
 class TaskDetailView(FormMixin, DetailView):
     model = Task
     template_name = 'treasurehunt/task.html'
@@ -172,11 +191,8 @@ class TaskDetailView(FormMixin, DetailView):
         form = self.get_form()
 
         if form.is_valid():
-            print("got to valid")
             return self.form_valid(form)
         else:
-            print("got to invalid")
-            self.request.session['score'] -= 1
             return self.form_invalid(form)
 
 
@@ -188,6 +204,9 @@ def qr(request):
     return render(request, 'treasurehunt/qr.html', {'title': 'QR'})
 
 
+"""
+This method handles the request from the user when they add a new custom route to the database
+"""
 def newroute(request):
     mappingFormSet = inlineformset_factory(Route, RouteLocationMapping,
                                            routeMappingForm,
