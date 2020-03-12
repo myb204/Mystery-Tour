@@ -13,7 +13,7 @@ Game Keepers - these users are able to log in to the Django Administrator site. 
 
 Developers - members of the development team have access to the shared code repository hosted on GitHub.
 
-
+--------------------------------------------------------
 
 Requirements.txt must be run to install the prerequisites:
 
@@ -49,8 +49,7 @@ urllib3==1.25.8
 
 whitenoise==5.0.1
 
-
-
+--------------------------------------------------------
 
 Instructions to run a local copy
 1. Navigate to technical-documents directory in a Python Virtual Environment with all of requirements.txt installed
