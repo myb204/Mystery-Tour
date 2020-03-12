@@ -1,13 +1,21 @@
 {% extends "treasurehunt/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="jumbotron text-center" style="background-color: darkgreen">
+    <div class="jumbotron text-center" style="background-color: darkgreen;border-radius: 0px">
         <h1 style="color: white">Task</h1>
     </div>
 
     <div class="text-center">
         <p>{{ task.taskText }}</p>
         <p></p>
+
+        {% for message in messages %}
+        <div class="alert alert-danger">
+            <a class="close" href="#" data-dismiss="alert">×</a>
+            {{ message }}
+        </div>
+        {% endfor %}
+
         <form action="" method="post">
             {% csrf_token %}
             <fieldset class="form-group">

@@ -180,7 +180,7 @@ class TaskDetailView(FormMixin, DetailView):
             return HttpResponseRedirect(nextInfo)
         else:
             self.request.session['score'] -= 5
-
+        messages.error(self.request, "Incorrect, try again! 5 points deducted!")
         return super(TaskDetailView, self).get(self, self.request)
 
     def get_success_url(self):
